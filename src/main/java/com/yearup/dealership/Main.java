@@ -7,175 +7,91 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
+    Dealership dealership = new Dealership();
+
     public static void main(String[] args) {
 
 
-        System.out.println(ColorCodes.TEXT_PURPLE + "\n*=*=*=*=*=*=*=*=*=* Welcome to My Dealership =*=*=**=*=*=*=*=*=*=*=*=\n" + ColorCodes.ANSI_RESET);
+        menu();
+    }
 
-
-
-
-        String driverClassname = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/cardealership";
-
-        try {
-            Class.forName(driverClassname);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        Connection connection = null;
-
-        try {
-            connection = DriverManager.getConnection(url, "tchou", "QQ112233!");
-        } catch (SQLException e) {
-            System.getLogger("Main").log(System.Logger.Level.ERROR, "Couldn't open SQL connection");
-        }
-
+    public static void menu() {
+        Dealership dealership = new Dealership();
         System.out.println("How would you like to find your vehicle?\nSearch By: ");
 
-        System.out.println("\n1) Price Range\n2) Make/Model\n3) Year Range\n4) Color\n5) Mileage Range\n6)Type");
+        System.out.println("\n1) Price Range\n2) Make/Model\n3) Year Range\n4) Color\n5) Mileage Range\n6)Type\n0)Exit");
         int userChoice = scanner.nextInt();
 
 
+        if (userChoice == 1) {
+            System.out.println("\nPlease type a price range for the vehicle you are looking for\n");
+            System.out.println("Min: ");
+            double minRange = scanner.nextDouble();
+            System.out.println("Max: ");
+            double maxRange = scanner.nextDouble();
+            dealership.vehicle(minRange, maxRange);
 
-        if(userChoice == 1){
-            System.out.println("You chose 1");
+            menu();
+        }
+        else if (userChoice == 2) {
+            System.out.println("\nWould you like to search for the vehicle's Make or Model?\n1)Make\n2)Model\n");
+            int makeOrModelOption = scanner.nextInt();
 
-            try {
-                PreparedStatement statement = connection.prepareStatement("""
-                               SELECT * FROM dealerships
-                               JOIN vehicles ON dealerships.dealership_id = vehicles.VIN
-                               WHERE price > ? AND price < ?;
+            if (makeOrModelOption == 1) {
+                System.out.println("Please type the make of the vehicle\n");
+                scanner.nextLine();
+                String makeOfVehicle = scanner.next();
+                dealership.getMakeOrModel(makeOrModelOption, makeOfVehicle);
 
-                        """);
-
-
-                ResultSet results = null;
-
-                results = statement.executeQuery();
-
-                while (results.next()) {
-                    String vin = results.getString("VIN");
-                    String make = results.getString("make");
-                    String model = results.getString("model");
-                    int year = results.getInt("year");
-                    double price = results.getDouble("price");
-                }
-                connection.close();
-            } catch (SQLException e) {
-                System.getLogger("Main").log(System.Logger.Level.ERROR, "Couldn't execute statement");
-            } catch (RuntimeException e) {
-                System.getLogger("Main").log(System.Logger.Level.ERROR, "RUNTIME EXCEPTION");
+            } else if (makeOrModelOption == 2) {
+                System.out.println("Please type the model of the vehicle\n");
+                scanner.nextLine();
+                String modelOfVehicle = scanner.next();
+                dealership.getMakeOrModel(makeOrModelOption, modelOfVehicle);
             }
-        }
-        else if(userChoice == 2){
-            System.out.println("You chose 2");
-        }
-        else if(userChoice == 3){
-            System.out.println("You chose 3");
-        }
-        else if(userChoice == 4){
-            System.out.println("You chose 4");
-        }
-        else if(userChoice == 5){
-            System.out.println("You chose 5");
-        }
-        else if(userChoice == 6){
-            System.out.println("You chose 6");
-        }
+            menu();
 
-//        try {
-//            PreparedStatement statement = connection.prepareStatement("""
-//                            SELECT *
-//                            FROM dealerships;
-//
-//                    """);
-//
-////            PreparedStatement statement1 = connection.prepareStatement("""
-////                            SELECT *
-////                            FROM vehicles;
-////
-////                    """);
-//
-//
-////            statement.setString(1, name.toString());
-////            statement.setString(2, address.toString());
-//
-//            ResultSet results = null;
-////            ResultSet results1 = null;
-//
-//            results = statement.executeQuery();
-////            results1 = statement1.executeQuery();
-//
-//            while (results.next()) {
-//                String vin = results.getString("VIN");
-//                String make = results.getString("make");
-//                String model = results.getString("model");
-//                int year = results.getInt("year");
-//                double price = results.getDouble("price");
-//            }
+        }
+        else if (userChoice == 3) {
+            System.out.println("\nPlease type the year range of the vehicle you're searching for\n");
+            System.out.println("Min: ");
+            int minYear = scanner.nextInt();
+            System.out.println("Max: ");
+            int maxYear = scanner.nextInt();
+            dealership.getVehicleByYear(minYear, maxYear);
+                menu();
+            }
+        else if (userChoice == 4) {
+            System.out.println("Please type the color of the vehicle you would like to see.\n");
+            String vehicleColor = scanner.next();
+            dealership.getVehicleByColor(vehicleColor);
+                menu();
+            }
+        else if (userChoice == 5) {
+            System.out.println("Please type the mileage range of the vehicle you are looking for\n");
+            System.out.println("Min: ");
+            int minMileage = scanner.nextInt();
+            System.out.println("Max: ");
+            int maxMileage = scanner.nextInt();
+            dealership.getVehicleByMileage(minMileage, maxMileage);
+                menu();
+            }
+        else if (userChoice == 6) {
+            System.out.println("Please type the type of vehicle you're searching for");
+            String typeOfVehicle = scanner.next();
+            dealership.getVehicleByType(typeOfVehicle);
+                menu();
+            }
+        else if (userChoice == 0) {
+                System.out.println("Have a nice day! :D");
+                System.exit(0);
+            }
+
+        else {
+                System.out.println("\nPlease type one of the options above\n");
+                menu();
+            }
 
 
-//            while (results.next() & results1.next()) {
-//                String name = results.getString("name");
-//                String address = results.getString("address");
-//                String phone = results.getString("phone");
-//                System.out.printf(ColorCodes.ANSI_BLUE + "Dealership name: %s" + ColorCodes.ANSI_RESET +
-//                        ColorCodes.ANSI_YELLOW + "\nAddress: %s" + ColorCodes.ANSI_RESET +
-//                        ColorCodes.PURPLE_BOLD_BRIGHT + "\nPhone number: %s \n\n" + ColorCodes.ANSI_RESET, name, address, phone);
-
-//                String make = results1.getString("make");
-//                int year = results1.getInt("year");
-//                double price = results1.getDouble("price");
-//                System.out.printf(ColorCodes.ANSI_BLUE + "Make: %s" + ColorCodes.ANSI_RESET +
-//                        ColorCodes.ANSI_YELLOW + "\nYear: %d" + ColorCodes.ANSI_RESET +
-//                        ColorCodes.PURPLE_BOLD_BRIGHT + "\nPrice: %.2f \n\n" + ColorCodes.ANSI_RESET, make, year, price);
-//            }
-//            connection.close();
-//        } catch (SQLException e) {
-//            System.getLogger("Main").log(System.Logger.Level.ERROR, "Couldn't execute statement");
-//        } catch (RuntimeException e) {
-//            System.getLogger("Main").log(System.Logger.Level.ERROR, "RUNTIME EXCEPTION");
-//        }
-        return;
+        }
     }
-
-
-    //methods
-
-    public static void menu(){
-        System.out.println("How would you like to find your vehicle?\nSearch By: ");
-
-        System.out.println("\n1) Price Range\n2) Make/Model\n3) Year Range\n4) Color\n5) Mileage Range\n6)Type");
-        int userChoice = scanner.nextInt();
-
-
-
-        if(userChoice == 1){
-            System.out.println("You chose 1");
-
-
-        }
-        else if(userChoice == 2){
-            System.out.println("You chose 2");
-        }
-        else if(userChoice == 3){
-            System.out.println("You chose 3");
-        }
-        else if(userChoice == 4){
-            System.out.println("You chose 4");
-        }
-        else if(userChoice == 5){
-            System.out.println("You chose 5");
-        }
-        else if(userChoice == 6){
-            System.out.println("You chose 6");
-        }
-
-
-
-    }
-
-
-}

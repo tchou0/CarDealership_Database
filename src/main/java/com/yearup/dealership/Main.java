@@ -17,9 +17,10 @@ public class Main {
 
     public static void menu() {
         Dealership dealership = new Dealership();
+        System.out.println(ColorCodes.TEXT_PURPLE + "\n*=*=*=*=*=*=*=*=*=* Welcome to My Dealership =*=*=**=*=*=*=*=*=*=*=*=\n" + ColorCodes.ANSI_RESET);
         System.out.println("How would you like to find your vehicle?\nSearch By: ");
 
-        System.out.println("\n1) Price Range\n2) Make/Model\n3) Year Range\n4) Color\n5) Mileage Range\n6)Type\n0)Exit");
+        System.out.println("\n1) Price Range\n2) Make/Model\n3) Year Range\n4) Color\n5) Mileage Range\n6) Type\n0) Exit");
         int userChoice = scanner.nextInt();
 
 

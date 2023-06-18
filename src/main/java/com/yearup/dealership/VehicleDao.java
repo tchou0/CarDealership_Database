@@ -10,11 +10,6 @@ public class VehicleDao{
 
     //=========================== FIND VEHICLE BY PRICE RANGE ===============================
     public void findPriceRange(double min, double max){
-        System.out.println(ColorCodes.TEXT_PURPLE + "\n*=*=*=*=*=*=*=*=*=* Welcome to My Dealership =*=*=**=*=*=*=*=*=*=*=*=\n" + ColorCodes.ANSI_RESET);
-
-
-
-
         String driverClassname = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/cardealership";
 
@@ -79,9 +74,6 @@ public class VehicleDao{
     //======================= GET VEHICLES BY MAKES OR MODELS ===================================
 
     public void findMakeOrModel(int choice, String makeOrModel){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(ColorCodes.TEXT_PURPLE + "\n*=*=*=*=*=*=*=*=*=* Welcome to My Dealership =*=*=**=*=*=*=*=*=*=*=*=\n" + ColorCodes.ANSI_RESET);
-
 
         String driverClassname = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/cardealership";
@@ -190,10 +182,6 @@ public class VehicleDao{
     }
 
     public void findByYear(int min, int max){
-        System.out.println(ColorCodes.TEXT_PURPLE + "\n*=*=*=*=*=*=*=*=*=* Welcome to My Dealership =*=*=**=*=*=*=*=*=*=*=*=\n" + ColorCodes.ANSI_RESET);
-
-
-
 
         String driverClassname = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/cardealership";
@@ -258,11 +246,6 @@ public class VehicleDao{
 
     public void findByColor(String colorOfVehicle){
 
-        System.out.println(ColorCodes.TEXT_PURPLE + "\n*=*=*=*=*=*=*=*=*=* Welcome to My Dealership =*=*=**=*=*=*=*=*=*=*=*=\n" + ColorCodes.ANSI_RESET);
-
-
-
-
         String driverClassname = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/cardealership";
 
@@ -324,10 +307,6 @@ public class VehicleDao{
     }
 
     public void findByMileage(int min, int max){
-        System.out.println(ColorCodes.TEXT_PURPLE + "\n*=*=*=*=*=*=*=*=*=* Welcome to My Dealership =*=*=**=*=*=*=*=*=*=*=*=\n" + ColorCodes.ANSI_RESET);
-
-
-
 
         String driverClassname = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/cardealership";
@@ -390,9 +369,6 @@ public class VehicleDao{
     }
 
     public void findByType(String typeOfVehicle){
-
-        System.out.println(ColorCodes.TEXT_PURPLE + "\n*=*=*=*=*=*=*=*=*=* Welcome to My Dealership =*=*=**=*=*=*=*=*=*=*=*=\n" + ColorCodes.ANSI_RESET);
-
 
         String driverClassname = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/cardealership";

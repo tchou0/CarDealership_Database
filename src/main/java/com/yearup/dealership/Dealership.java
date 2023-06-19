@@ -148,7 +148,7 @@ public class Dealership {
     public void mainMenu(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n================== MAIN MENU ======================\n");
-        System.out.println("Would you like to\n1)Search for a vehicle\n2)Add or Remove a vehicle\n3)Find Sales Or lease\n0)Exit Program");
+        System.out.println("Would you like to\n1) Search for a vehicle\n2) Add or Remove a vehicle\n3) Find Sales Or lease\n0) Exit Program");
         int userInput = scanner.nextInt();
 
         switch (userInput){
